@@ -1,11 +1,54 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 
-export default function SHoppingCart() {
+export default function ShoppingCart() {
   const [cartItems, setCartitems] = useState([]);
+
+  //Create the addToCart function for the form
+  function addToCart(e) {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const price = e.target.price.value;
+    const newCartItem = {
+      id: Date.now(),
+      name: name,
+      price: price,
+    };
+    setCartitems([...cartItems, newCartItem]);
+  }
+  //Remove item from the cart
+  function removeItemFromCart(itemId) {
+    const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
+    setCartitems(updatedCartItems);
+  }
+  //Calculate the totl price of the item in the cart
+  function calculateTotalPrice() {
+    return cartItems.reduce(
+      (total, item) =>
+        // {
+        //   return total + parseInt(item.price);
+        // }, 0
+        total + parseInt(item.price),
+      0
+    );
+  }
   return (
     <>
       <h1>Cart List</h1>
+      <form onSubmit={addToCart}>
+        <input type="text" name="name" placeholder="Item name" required />
+        <input type="number" name="price" placeholder="Item value" required />
+        <button type="submit">Add item to cart</button>
+      </form>
+      <ul>
+        {cartItems.map((item) => (
+          <li key={item.id}>
+            {item.price} - {item.name}
+            <button onClick={() => removeItemFromCart(item.id)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+      <p>Total price: ${calculateTotalPrice()}</p>
     </>
   );
 }

@@ -10,11 +10,18 @@ export default function ShoppingCart() {
     e.preventDefault();
     const name = e.target.name.value;
     const price = e.target.price.value;
+    // if (typeof name !== "string") {
+    //   return `Invalid input string`;
+    // }
+    if (typeof price !== "number" && Number.isInteger(price)) {
+      return `Invalid price value`;
+    }
     const newCartItem = {
       id: Date.now(),
       name: name,
       price: price,
     };
+
     setCartitems([...cartItems, newCartItem]);
   }
   //Remove item from the cart
@@ -44,9 +51,12 @@ export default function ShoppingCart() {
         </form>
         <ul>
           {cartItems.map((item) => (
-            <li key={item.id}>
+            <li key={item.id} className="cartItemsList">
               {item.price} - {item.name}
-              <button onClick={() => removeItemFromCart(item.id)}>
+              <button
+                onClick={() => removeItemFromCart(item.id)}
+                className="removeItemButton"
+              >
                 Remove
               </button>
             </li>

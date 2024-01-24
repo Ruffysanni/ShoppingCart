@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
+import "./ShoppingCartStyle.css";
 
 export default function ShoppingCart() {
   const [cartItems, setCartitems] = useState([]);
@@ -34,21 +35,28 @@ export default function ShoppingCart() {
   }
   return (
     <>
-      <h1>Cart List</h1>
-      <form onSubmit={addToCart}>
-        <input type="text" name="name" placeholder="Item name" required />
-        <input type="number" name="price" placeholder="Item value" required />
-        <button type="submit">Add item to cart</button>
-      </form>
-      <ul>
-        {cartItems.map((item) => (
-          <li key={item.id}>
-            {item.price} - {item.name}
-            <button onClick={() => removeItemFromCart(item.id)}>Remove</button>
-          </li>
-        ))}
-      </ul>
-      <p>Total price: ${calculateTotalPrice()}</p>
+      <div className="cartBox">
+        <h1>Cart List</h1>
+        <form onSubmit={addToCart}>
+          <input type="text" name="name" placeholder="Item name" required />
+          <input type="number" name="price" placeholder="Item value" required />
+          <button type="submit">Add item to cart</button>
+        </form>
+        <ul>
+          {cartItems.map((item) => (
+            <li key={item.id}>
+              {item.price} - {item.name}
+              <button onClick={() => removeItemFromCart(item.id)}>
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
+        <p className="totalPrice">
+          <span className="priceText">Total price:</span> $
+          {calculateTotalPrice()}
+        </p>
+      </div>
     </>
   );
 }

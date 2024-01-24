@@ -49,9 +49,9 @@ export default function ShoppingCart() {
           <input type="number" name="price" placeholder="Item value" required />
           <button type="submit">Add item to cart</button>
         </form>
-        <ul>
+        <ul className="cartItemsList">
           {cartItems.map((item) => (
-            <li key={item.id} className="cartItemsList">
+            <li key={item.id}>
               {item.price} - {item.name}
               <button
                 onClick={() => removeItemFromCart(item.id)}

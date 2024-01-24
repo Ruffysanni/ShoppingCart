@@ -28,6 +28,10 @@ form input {
   border-bottom: 1px solid black;
   background: transparent;
 }
+form input:focus {
+  outline: none;
+  border-radius: 20px;
+}
 
 form button {
   width: 100%;
@@ -50,4 +54,14 @@ form button:hover {
   margin: 5px auto;
 }
 .cartItemsList {
+  width: 100%;
+  background: gold;
+  height: 40px;
 }
+/* .cartItemsList li button {
+  float: right;
+  font-size: 15px;
+  padding: 5px;
+  margin-right: 10px;
+  height: 100%;
+} */
